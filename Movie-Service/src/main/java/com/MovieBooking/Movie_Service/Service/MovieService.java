@@ -11,5 +11,5 @@ public interface MovieService {
     List<Movie> getAllMovies();
     Optional<Movie> getById(Long movieId);
     Movie updateMovie(Long movieId, Movie movie);
-    boolean deleteMovie(Long movieId);
+    boolean deleteMovie(String movieId);
 }

@@ -22,6 +22,7 @@ public class BookingServiceImpl implements BookingService {
     public Booking createBooking(BookingRequest booking) {
         Optional<Movie> movieExists = movieRepository.findByMovieId(booking.getMovieId());
         if(movieExists.isEmpty()){
+
             throw new RuntimeException("Movie Does not Exists");
         }
         Movie movie = movieExists.get();
@@ -33,7 +34,7 @@ public class BookingServiceImpl implements BookingService {
         System.out.println(movie.getAvailableSeats());
         movieRepository.save(movie);
         Booking booking1 = new Booking();
-        booking1.setUserId(booking.getUserId());
+        booking1.setUsername(booking.getUsername());
         booking1.setMovieId(movie.getMovieId());
         booking1.setMovieTitle(movie.getTitle());
         booking1.setBookingTime(LocalDateTime.now());
@@ -48,8 +49,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> getByUserId(String userId) {
-        return bookingRepository.findByUserId(userId);
+    public List<Booking> getByUserId(String username) {
+        return bookingRepository.findByUsername(username);
     }
 
 }

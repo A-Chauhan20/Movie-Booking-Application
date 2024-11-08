@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.beans.Encoder;
 import java.util.List;
 
 @Service
@@ -19,14 +18,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRepo userRepo;
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Override
-    public User registerUser(User user) {
+    public void registerUser(User user) {
         try{
             if(userRepo.findByUsername(user.getUsername()).isPresent()){
                 throw new Exception("User Already Exists");
             }
             else {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
-               return userRepo.save(user);
+                userRepo.save(user);
             }
 
         } catch (Exception e) {
@@ -46,7 +45,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRole())
+                .roles(user.getRole().get(0))
                 .build();
     }
 }

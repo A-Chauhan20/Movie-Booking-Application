@@ -2,7 +2,7 @@ package com.MovieBooking.Movie_Service.Entity;
 
 public class BookingRequest {
     private String movieId;
-    private String userId;
+    private String username;
     private int seatsToBook;
 
     public String getMovieId() {
@@ -13,12 +13,12 @@ public class BookingRequest {
         this.movieId = movieId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getSeatsToBook() {

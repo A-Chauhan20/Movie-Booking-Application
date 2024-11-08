@@ -28,10 +28,10 @@ public class BookingController {
         return new ResponseEntity<List<Booking>>(bookingService.getAllBookings(), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> getBookingByUserId(@PathVariable String userId){
-       if(!bookingService.getByUserId(userId).isEmpty()){
-           return new ResponseEntity<List<Booking>>(bookingService.getByUserId(userId), HttpStatus.OK);
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getBookingByUserId(@PathVariable String username){
+       if(!bookingService.getByUserId(username).isEmpty()){
+           return new ResponseEntity<List<Booking>>(bookingService.getByUserId(username), HttpStatus.OK);
        }
        return new ResponseEntity<>("No Bookings available", HttpStatus.NO_CONTENT);
     }

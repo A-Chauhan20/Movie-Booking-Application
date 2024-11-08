@@ -15,15 +15,11 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie createMovie(Movie movie) {
         Optional<Movie> movieExist = movieRepository.findByMovieId(movie.getMovieId());
-       try{
+
            if(movieExist.isPresent()){
               throw new RuntimeException("Movie Already exist");
            }
            else return movieRepository.save(movie);
-       }
-       catch(Exception e){
-           throw new RuntimeException(e);
-       }
 
 
     }
@@ -50,9 +46,9 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public boolean deleteMovie(Long movieId) {
-        if(movieRepository.findById(movieId).isPresent()){
-            movieRepository.deleteById(movieId);
+    public boolean deleteMovie(String movieId) {
+        if(movieRepository.findByMovieId(movieId).isPresent()){
+            movieRepository.deleteById(Long.parseLong(movieId));
             return true;
         }
         else return false;

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -18,7 +20,7 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody UserRequest request){
         try{
             if(request!=null){
-                User user = new User(request.username, request.email, request.password, "USER");
+                User user = new User(request.username, request.email, request.password, List.of("USER"));
                 userService.registerUser(user);
             }
 
